@@ -5,10 +5,10 @@
     <title>Titanic Survival Predictor</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #E6E6FA;
+            background-color: #666;
             overflow-x: hidden;
             position: relative;
         }
@@ -27,27 +27,25 @@
         }
         h2 {
             text-align: center;
-            color: #E6E6FA;
+            color: #333;
             font-size: 28px;
-            font-weight: bold;
-            font-family: 'Playfair Display', serif;
-            text-transform: uppercase;
+            font-family: 'Arial', serif;
+            text-transform: lowercase;
             letter-spacing: 2px;
             margin-bottom: 20px;
         }
         form {
             max-width: 500px;
             margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(0, 0, 250);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 15px rgba(0, 0, 130);
         }
         label {
             display: block;
             margin-bottom: 15px;
-            color: #0d3b66;
-            font-weight: bold;
+            color: #444;
         }
         input[type="text"],
         input[type="number"],
@@ -63,8 +61,8 @@
             margin-bottom: 15px;
         }
         input[type="submit"] {
-            background-color: #4B0082;
-            color: #fff;
+            background-color: #333;
+            color: #222;
             border: none;
             padding: 15px 20px;
             border-radius: 5px;
@@ -73,7 +71,7 @@
             transition: background-color 0.3s;
         }
         input[type="submit"]:hover {
-            background-color: #4B0082;
+            background-color: #fff;
         }
         .container {
             display: flex;
@@ -81,8 +79,8 @@
             align-items: center;
             position: relative;
             margin-bottom: 50px;
-            font-family: 'Playfair Display', serif;
-            color: #6a0dad; 
+            font-family: 'Arial', serif;
+            color: #777; 
         }
     </style>
 </head>
