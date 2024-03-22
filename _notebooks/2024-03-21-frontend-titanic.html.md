@@ -3,9 +3,11 @@ title: Frontend Titanic Code
 comments: true
 layout: post
 description: Code for our Titanic dataset
+author: John Mortensen
 type: ccc
 courses: { csp: {week: 25} }
 ---
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
