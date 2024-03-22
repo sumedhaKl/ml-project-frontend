@@ -3,9 +3,8 @@ toc: true
 comments: true
 layout: post
 title: Frontend Titanic Code
-description: Code for our Titanic dataset 
-courses: { csp: {week: 25} }
-type: collab
+description: Code for our Titanic dataset
+type: blogs
 ---
 <html lang="en">
 <head>
