@@ -5,9 +5,8 @@ layout: post
 title: Frontend Titanic Code
 description: Code for our Titanic dataset 
 courses: { csp: {week: 25} }
-type: ccc
+type: collab
 ---
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
