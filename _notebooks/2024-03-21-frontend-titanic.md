@@ -1,8 +1,9 @@
 ---
-layout: post
 toc: true
-title: ML, Titanic Data
-description: Exploring the Titanic dataset with machine learning. 
+comments: true
+layout: post
+title: Frontend Titanic Code
+description: Code for our Titanic dataset 
 courses: { csp: {week: 25} }
 type: ccc
 ---
