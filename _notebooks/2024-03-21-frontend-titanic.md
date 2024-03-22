@@ -1,10 +1,10 @@
 ---
-toc: true
+title: Frontend Titanic Code
 comments: true
 layout: post
-title: Frontend Titanic Code
 description: Code for our Titanic dataset
-type: blogs
+type: ccc
+courses: { csp: {week: 25} }
 ---
 <html lang="en">
 <head>
