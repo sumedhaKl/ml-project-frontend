@@ -126,14 +126,14 @@
             var name = document.getElementById('name');
             var resultDiv = document.getElementById('result');
             var formData = {
-                pclass: form['pclass'].value,
+                pclass: form['pclass'].options[form['pclass'].selectedIndex].value,
                 sex: form['sex'].value,
                 age: form['age'].value,
                 sibsp: form['sibsp'].value,
                 parch: form['parch'].value,
                 fare: form['fare'].value,
                 embarked: form['embarked'].value,
-                alone: form['alone'].checked ? 'true' : 'false'
+                alone: form['alone'].checked
             };
             fetch('http://localhost:8086/api/titanic/predict', {
                 method: 'POST',
@@ -149,13 +149,13 @@
                 for (var key in data) {
                     resultDiv.innerHTML += '<p>' + key + ': ' + data[key] + '</p>';
                 }
-                var deathProbability = parseFloat(data['death_percentage']);
-                var survivalProbability = parseFloat(data['survivability_percentage']);
+                var deathProbability = parseFloat(data['die']);
+                var survivalProbability = parseFloat(data['survive']);
             })
             .catch(error => {
                 console.error('Error:', error);
             });
         }
-    </script>
+    </script>    
 </body>
 </html>
