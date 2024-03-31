@@ -22,15 +22,15 @@
         form {
             max-width: 500px;
             margin: 0 auto;
-            background-color: rgba(0, 0, 250);
+            background-color: rgba(250, 250, 250);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 130);
+            box-shadow: 0 0 15px rgba(0, 0, 0);
         }
         label {
             display: block;
             margin-bottom: 15px;
-            color: #444;
+            color: grey;
         }
         input[type="text"],
         input[type="number"],
@@ -70,6 +70,26 @@
     </style>
 </head>
 <body>
+    <h1>Salary Data</h1>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <tr>
+            <th>Work Year</th>
+            <th>Experience Level</th>
+            <th>Employment Type</th>
+            <th>Job Title</th>
+            <th>Salary</th>
+            <th>Salary Currency</th>
+            <th>Salary in US Dollars</th>
+            <th>Employee Residence</th>
+            <th>Remote Ratio</th>
+            <th>Company Location</th>
+            <th>Company Size</th>
+        </tr>
+        <tr>
+        <td>Data 1</td>
+        <td>Data 2</td>
+        </tr>
+    </table>
     <h1>Salary Predictor</h1>
     <form id="salaryForm">
         <label for="workYear">Work Year:</label>
