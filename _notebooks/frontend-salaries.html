@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-    <title>Salary Data</title>
+    <title>Salary Predictor</title>
     <style>
         body{
             font-family: Arial, Helvetica, sans-serif;
@@ -19,28 +19,134 @@
         td{
             color: orange;
         }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 250);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 130);
+        }
+        label {
+            display: block;
+            margin-bottom: 15px;
+            color: #444;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="checkbox"] {
+            margin-bottom: 15px;
+        }
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            margin-bottom: 50px;
+            font-family: 'Arial', serif;
+            color: #777; 
+        }
     </style>
 </head>
 <body>
-    <h1>Salary Data</h1>
-    <table border="1" cellspacing="0" cellpadding="5">
-        <tr>
-            <th>Work Year</th>
-            <th>Experience Level</th>
-            <th>Employment Type</th>
-            <th>Job Title</th>
-            <th>Salary</th>
-            <th>Salary Currency</th>
-            <th>Salary in US Dollars</th>
-            <th>Employee Residence</th>
-            <th>Remote Ratio</th>
-            <th>Company Location</th>
-            <th>Company Size</th>
-        </tr>
-        <tr>
-        <td>Data 1</td>
-        <td>Data 2</td>
-        </tr>
-    </table>
+    <h1>Salary Predictor</h1>
+    <form id="salaryForm">
+        <label for="workYear">Work Year:</label>
+        <input type="number" id="workYear" name="workYear" required><br><br>
+        <label for="experienceLevel">Experience Level:</label>
+        <select id="experienceLevel" name="experienceLevel" required>
+            <option value="entry">Entry Level</option>
+            <option value="mid">Mid Level</option>
+            <option value="senior">Senior Level</option>
+        </select><br><br>
+        <label for="employmentType">Employment Type:</label>
+        <select id="employmentType" name="employmentType" required>
+            <option value="fullTime">Full-Time</option>
+            <option value="partTime">Part-Time</option>
+            <option value="contract">Contract</option>
+        </select><br><br>
+        <label for="jobTitle">Job Title:</label>
+        <input type="text" id="jobTitle" name="jobTitle" required><br><br>
+        <label for="salary">Salary:</label>
+        <input type="number" id="salary" name="salary" required><br><br>
+        <label for="currency">Salary Currency:</label>
+        <select id="currency" name="currency" required>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+        </select><br><br>
+        <label for="usdSalary">Salary in US Dollars:</label>
+        <input type="number" id="usdSalary" name="usdSalary" required><br><br>
+        <label for="employeeResidence">Employee Residence:</label>
+        <input type="text" id="employeeResidence" name="employeeResidence" required><br><br>
+        <label for="remoteRatio">Remote Ratio:</label>
+        <input type="number" id="remoteRatio" name="remoteRatio" required><br><br>
+        <label for="companyLocation">Company Location:</label>
+        <input type="text" id="companyLocation" name="companyLocation" required><br><br>
+        <label for="companySize">Company Size:</label>
+        <input type="number" id="companySize" name="companySize" required><br><br>
+        <button type="button" onclick="predictSalary()">Predict Salary</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        function predictSalary() {
+            var form = document.getElementById('salaryForm');
+            var resultDiv = document.getElementById('result');
+            var formData = {
+                workYear: form['workYear'].value,
+                experienceLevel: form['experienceLevel'].value,
+                employmentType: form['employmentType'].value,
+                jobTitle: form['jobTitle'].value,
+                salary: form['salary'].value,
+                currency: form['currency'].value,
+                usdSalary: form['usdSalary'].value,
+                employeeResidence: form['employeeResidence'].value,
+                remoteRatio: form['remoteRatio'].value,
+                companyLocation: form['companyLocation'].value,
+                companySize: form['companySize'].value
+            };
+            fetch('http://localhost:8086/api/salary/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                resultDiv.innerHTML = '<h2>Prediction Result</h2>';
+                for (var key in data) {
+                    resultDiv.innerHTML += '<p>' + key + ': ' + data[key] + '</p>';
+                }
+                var predictedSalary = parseFloat(data['predictedSalary']);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>
