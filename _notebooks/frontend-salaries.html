@@ -81,7 +81,6 @@
             <th>Experience Level</th>
             <th>Employment Type</th>
             <th>Job Title</th>
-            <th>Salary</th>
             <th>Salary Currency</th>
             <th>Salary in US Dollars</th>
             <th>Employee Residence</th>
@@ -112,8 +111,6 @@
         </select><br><br>
         <label for="jobTitle">Job Title:</label>
         <input type="text" id="jobTitle" name="jobTitle" required><br><br>
-        <label for="salary">Salary:</label>
-        <input type="number" id="salary" name="salary" required><br><br>
         <label for="currency">Salary Currency:</label>
         <select id="currency" name="currency" required>
             <option value="USD">USD</option>
@@ -143,7 +140,6 @@
                 experienceLevel: form['experienceLevel'].value,
                 employmentType: form['employmentType'].value,
                 jobTitle: form['jobTitle'].value,
-                salary: form['salary'].value,
                 currency: form['currency'].value,
                 usdSalary: form['usdSalary'].value,
                 employeeResidence: form['employeeResidence'].value,
