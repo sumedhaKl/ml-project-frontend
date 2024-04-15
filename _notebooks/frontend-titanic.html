@@ -129,7 +129,7 @@
             .then(data => {
                 var resultDiv = document.getElementById('result');
                 resultDiv.innerHTML = '<h2>Prediction Result</h2>';
-                resultDiv.innerHTML += '<p>Predicted Survival from Postman: $' + data.predicted_survival.toFixed(2) + '</p>';
+                resultDiv.innerHTML += '<p>Predicted Survival from Postman: ' + (data.predicted_survival ? 'Survived' : 'Not Survived') + '</p>';
             })
             .catch(error => {
                 console.error('Error:', error);
