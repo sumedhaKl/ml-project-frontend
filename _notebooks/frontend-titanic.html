@@ -122,6 +122,8 @@
     <div id="result"></div>
     <script>
         function fetchFromPostman() {
+        const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
         const raw = JSON.stringify({
             "name": "Sumedha Kamaraju",
             "pclass": 2,
