@@ -121,41 +121,20 @@
     </form>
     <div id="result"></div>
     <script>
-        function predictSurvival() {
-            var form = document.getElementById('titanicForm');
-            var name = document.getElementById('name');
-            var resultDiv = document.getElementById('result');
-            var formData = {
-                pclass: form['pclass'].options[form['pclass'].selectedIndex].value,
-                sex: form['sex'].value,
-                age: form['age'].value,
-                sibsp: form['sibsp'].value,
-                parch: form['parch'].value,
-                fare: form['fare'].value,
-                embarked: form['embarked'].value,
-                alone: form['alone'].checked
-            };
-            fetch('http://localhost:8086/api/titanic/predict', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
+        function fetchFromPostman() {
+            var postmanURL = 'http://127.0.0.1:8086/api/titanic/predict';
+            
+            fetch(postmanURL)
             .then(response => response.json())
             .then(data => {
-                resultDiv.innerHTML = '<h2>Prediction Result for ' + name.value + '</h2>';
-                for (var key in data) {
-                    resultDiv.innerHTML += '<p>' + key + ': ' + data[key] + '</p>';
-                }
-                var deathProbability = parseFloat(data['die']);
-                var survivalProbability = parseFloat(data['survive']);
+                var resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = '<h2>Prediction Result</h2>';
+                resultDiv.innerHTML += '<p>Predicted Survival from Postman: $' + data.predicted_survival.toFixed(2) + '</p>';
             })
             .catch(error => {
                 console.error('Error:', error);
             });
         }
-    </script>    
+    </script>   
 </body>
 </html>
