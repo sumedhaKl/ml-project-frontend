@@ -122,9 +122,26 @@
     <div id="result"></div>
     <script>
         function fetchFromPostman() {
-            var postmanURL = 'http://127.0.0.1:8086/api/titanic/predict';
-            
-            fetch(postmanURL)
+        const raw = JSON.stringify({
+            "name": "Sumedha Kamaraju",
+            "pclass": 2,
+            "sex": "female",
+            "age": 17,
+            "sibsp": 0,
+            "parch": 2,
+            "fare": 16,
+            "embarked": "S",
+            "alone": "False"
+            });
+        const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
+            };
+            fetch("http://127.0.0.1:8086/api/titanic/predict", requestOptions)
+            .then((response) => response.text())
+            .then((result) => console.log(result))
             .then(response => response.json())
             .then(data => {
                 var resultDiv = document.getElementById('result');
