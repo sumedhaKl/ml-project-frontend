@@ -13,12 +13,6 @@
             text-align: center;
             color: blueviolet;
         }
-        tr{
-            color: green;
-        }
-        td{
-            color: orange;
-        }
         h2{
             text-align: center;
             color: black;
@@ -70,6 +64,12 @@
             margin-bottom: 50px;
             font-family: 'Arial', serif;
             color: #777; 
+        }
+        tr{
+            color: green;
+        }
+        td{
+            color: orange;
         }
     </style>
 </head>
@@ -181,40 +181,19 @@
         <input type="text" id="companyLocation" name="companyLocation" required><br><br>
         <label for="companySize">Company Size:</label>
         <input type="text" id="companySize" name="companySize" required><br><br>
-        <button type="button" onclick="predictSalary()">Predict Salary</button>
+        <button type="button" onclick="fetchFromPostman()">Predict Salary</button>
     </form>
     <div id="result"></div>
     <script>
-        function predictSalary() {
-            var form = document.getElementById('salaryForm');
-            var resultDiv = document.getElementById('result');
-            var formData = {
-                workYear: form['workYear'].value,
-                experienceLevel: form['experienceLevel'].value,
-                employmentType: form['employmentType'].value,
-                jobTitle: form['jobTitle'].value,
-                currency: form['currency'].value,
-                usdSalary: form['usdSalary'].value,
-                employeeResidence: form['employeeResidence'].value,
-                remoteRatio: form['remoteRatio'].value,
-                companyLocation: form['companyLocation'].value,
-                companySize: form['companySize'].value
-            };
-            fetch('http://localhost:8086/api/salary/predict', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
+        function fetchFromPostman() {
+            var postmanURL = 'http://127.0.0.1:8086/api/salaries/predict';
+            
+            fetch(postmanURL)
             .then(response => response.json())
             .then(data => {
+                var resultDiv = document.getElementById('result');
                 resultDiv.innerHTML = '<h2>Prediction Result</h2>';
-                for (var key in data) {
-                    resultDiv.innerHTML += '<p>' + key + ': ' + data[key] + '</p>';
-                }
-                var predictedSalary = parseFloat(data['predictedSalary']);
+                resultDiv.innerHTML += '<p>Predicted Salary from Postman: $' + data.predicted_salary.toFixed(2) + '</p>';
             })
             .catch(error => {
                 console.error('Error:', error);
