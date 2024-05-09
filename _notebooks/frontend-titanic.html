@@ -87,7 +87,7 @@
 </head>
 <body>
     <h1>Titanic Survival Predictor</h1>
-    <form id="titanicForm">
+    <form id="titanicForm" onsubmit="return false;">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
         <label for="pclass">Passenger Class:</label>
@@ -117,38 +117,39 @@
         </select><br><br>
         <label for="alone">Alone:</label>
         <input type="checkbox" id="alone" name="alone"><br><br>
-        <button type="button" onclick="fetchFromPostman()">Predict Survival</button>
+        <button type="submit" onclick="fetchFromPostman()">Predict Survival</button>
     </form>
-    <div id="result"></div>
+    <div id="result" style="text-align: center;">
+        <h2>Prediction Result</h2>
+        <p id="predictedSurvival">Predicted Survival from Postman: </p>
+    </div>
     <script>
         function fetchFromPostman() {
-        const myHeaders = new Headers();
+            const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
-        const raw = JSON.stringify({
-            "name": "Sumedha Kamaraju",
-            "pclass": 2,
-            "sex": "female",
-            "age": 17,
-            "sibsp": 0,
-            "parch": 2,
-            "fare": 16,
-            "embarked": "S",
-            "alone": "False"
-            });
-        const requestOptions = {
-            method: "POST",
-            headers: myHeaders,
-            body: raw,
-            redirect: "follow"
+            const formData = {
+                "name": document.getElementById("name").value,
+                "pclass": parseInt(document.getElementById("pclass").value),
+                "sex": document.getElementById("sex").value,
+                "age": parseInt(document.getElementById("age").value),
+                "sibsp": parseInt(document.getElementById("sibsp").value),
+                "parch": parseInt(document.getElementById("parch").value),
+                "fare": parseFloat(document.getElementById("fare").value),
+                "embarked": document.getElementById("embarked").value,
+                "alone": document.getElementById("alone").checked.toString() 
+            };
+            const raw = JSON.stringify(formData);
+            const requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: raw,
+                redirect: "follow"
             };
             fetch("http://127.0.0.1:8086/api/titanic/predict", requestOptions)
-            .then((response) => response.text())
-            .then((result) => console.log(result))
             .then(response => response.json())
             .then(data => {
-                var resultDiv = document.getElementById('result');
-                resultDiv.innerHTML = '<h2>Prediction Result</h2>';
-                resultDiv.innerHTML += '<p>Predicted Survival from Postman: ' + (data.predicted_survival ? 'Survived' : 'Not Survived') + '</p>';
+                const predictedSurvivalElement = document.getElementById('predictedSurvival');
+                predictedSurvivalElement.textContent = 'Predicted Survival from Postman: ' + (data.survive ? 'Survived' : 'Not Survived');
             })
             .catch(error => {
                 console.error('Error:', error);
