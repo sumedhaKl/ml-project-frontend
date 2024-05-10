@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,7 +63,7 @@
         }
         input[type="submit"] {
             background-color: #333;
-            color: #222;
+            color: #fff;
             border: none;
             padding: 15px 20px;
             border-radius: 5px;
@@ -125,8 +125,6 @@
     </div>
     <script>
         function fetchFromPostman() {
-            const myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
             const formData = {
                 "name": document.getElementById("name").value,
                 "pclass": parseInt(document.getElementById("pclass").value),
@@ -138,23 +136,29 @@
                 "embarked": document.getElementById("embarked").value,
                 "alone": document.getElementById("alone").checked.toString() 
             };
-            const raw = JSON.stringify(formData);
             const requestOptions = {
                 method: "POST",
-                headers: myHeaders,
-                body: raw,
-                redirect: "follow"
+                headers: {
+                    "Content-Type": "application/JSON"
+                },
+                body: JSON.stringify(formData)
             };
             fetch("http://127.0.0.1:8086/api/titanic/predict", requestOptions)
             .then(response => response.json())
             .then(data => {
                 const predictedSurvivalElement = document.getElementById('predictedSurvival');
-                predictedSurvivalElement.textContent = 'Predicted Survival from Postman: ' + (data.survive ? 'Survived' : 'Not Survived');
+                const surviveProbability = data.survive * 100;
+                const dieProbability = data.die * 100;
+                if (surviveProbability > dieProbability) {
+                    predictedSurvivalElement.textContent = `Predicted Survival from Postman: Survived (${surviveProbability.toFixed(2)}%)`;
+                } else {
+                    predictedSurvivalElement.textContent = `Predicted Survival from Postman: Not Survived (${dieProbability.toFixed(2)}%)`;
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-        }
+        }        
     </script>   
 </body>
 </html>
