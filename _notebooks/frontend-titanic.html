@@ -61,7 +61,7 @@
         input[type="checkbox"] {
             margin-bottom: 15px;
         }
-        input[type="submit"] {
+        button[type="button"] {
             background-color: #333;
             color: #fff;
             border: none;
@@ -70,9 +70,11 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s;
+            width: 100%;
         }
-        input[type="submit"]:hover {
+        button[type="button"]:hover {
             background-color: #fff;
+            color: #333;
         }
         .container {
             display: flex;
@@ -87,7 +89,7 @@
 </head>
 <body>
     <h1>Titanic Survival Predictor</h1>
-    <form id="titanicForm" onsubmit="return false;">
+    <form id="titanicForm">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
         <label for="pclass">Passenger Class:</label>
@@ -117,7 +119,7 @@
         </select><br><br>
         <label for="alone">Alone:</label>
         <input type="checkbox" id="alone" name="alone"><br><br>
-        <button type="submit" onclick="fetchFromPostman()">Predict Survival</button>
+        <button type="button" onclick="fetchFromPostman()">Predict Survival</button>
     </form>
     <div id="result" style="text-align: center;">
         <h2>Prediction Result</h2>
@@ -136,29 +138,31 @@
                 "embarked": document.getElementById("embarked").value,
                 "alone": document.getElementById("alone").checked.toString() 
             };
+            const raw = JSON.stringify(formData);
             const requestOptions = {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/JSON"
+                    "Content-Type": "application/json"
                 },
-                body: JSON.stringify(formData)
+                body: raw,
+                redirect: "follow"
             };
+        
             fetch("http://127.0.0.1:8086/api/titanic/predict", requestOptions)
             .then(response => response.json())
             .then(data => {
                 const predictedSurvivalElement = document.getElementById('predictedSurvival');
                 const surviveProbability = data.survive * 100;
                 const dieProbability = data.die * 100;
-                if (surviveProbability > dieProbability) {
-                    predictedSurvivalElement.textContent = `Predicted Survival from Postman: Survived (${surviveProbability.toFixed(2)}%)`;
-                } else {
-                    predictedSurvivalElement.textContent = `Predicted Survival from Postman: Not Survived (${dieProbability.toFixed(2)}%)`;
-                }
+                const surviveText = `Survived (${surviveProbability.toFixed(2)}%)`;
+                const dieText = `Not Survived (${dieProbability.toFixed(2)}%)`;
+                const resultText = surviveProbability > dieProbability ? surviveText : dieText;
+                predictedSurvivalElement.textContent = `Predicted Survival from Postman: ${resultText}`;
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-        }        
+        }               
     </script>   
 </body>
 </html>
