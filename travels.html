@@ -1,0 +1,385 @@
+---
+layout: base
+title: Personal Travels
+permalink: /travels
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Travels</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: url("https://files.catbox.moe/1m85ow.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top;
+            text-align: center;
+        }
+
+        #diary-title-container {
+            background-color: rgb(192, 175, 132);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top;
+            color: black;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        #diary {
+            width: 70%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #c29191;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .diary-container {
+            text-align: center;
+        }
+
+        .data-container {
+            background-color: white;
+            border: 2px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            text-align: center;
+            overflow-x: auto;
+            overflow-y: auto;
+            min-height: 350px;
+        }
+
+        .recipe-buttons {
+            padding: 15px 30px;
+            background-color: #bdc8d4;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 5px;
+            width: 60%;
+            margin: 20px auto;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .recipe-buttons:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            word-wrap: break-word;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #error {
+            color: rgb(71, 32, 32);
+            font-size: 24px;
+        }
+
+        input {
+            margin: 10px 0;
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            border: 2px solid rgb(65, 101, 117);
+            width: 80%;
+            max-width: 500px;
+        }
+
+        h2 {
+            color: white; 
+            margin-top: 20px;
+        }
+
+        form {
+            margin: 20px 0;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            text-align: left;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        #recipeContainer {
+            display: none;
+        }
+
+        #hideButton {
+            display: none;
+        }
+    </style>
+</head>
+<body class='sandiego-background'>
+    <a id="homeButton" href="index" style="position: fixed; top: 20px; left: 20px; font-size: 16px; text-decoration: none; color: #333; padding: 5px 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #f2f2f2;">Home</a>
+
+    <div id='diary-title-container'>
+        <h1 class='title'>Personal Travels</h1>
+    </div>
+    <br>
+    <br>
+
+    <h2 id="subtitle">Travels:</h2>
+    <form id="recipeForm" class="form-control">
+        <div>
+            <label for="placename">Where did you go?</label>
+            <input type="text" id="placename" name="placename" required>
+        </div>  
+        <div>
+            <label for="date">When did you go?</label>
+            <input type="date" id="date" name="date" required>
+        </div>   
+        <div>
+            <label for="about">What was your experience like?</label>
+            <input type="text" id="about" name="about" required>
+        </div> 
+        <div>
+            <label for="experience">Rate Your Experience:</label>
+            <select id="experience" name="experience" required>
+                <option value="fun">fun</option>
+                <option value="okok">okok</option>
+                <option value="boring">boring</option>
+            </select>
+        </div>
+    </form>
+    <button class="recipe-buttons" onclick="travel()">New Travel</button>
+    <p id="error"></p>
+    <hr>
+    <button class="recipe-buttons" onclick="fetchTravel()">Load Personal Travels</button>
+    <div id="sort-options">
+        <label for="sort-by">Sort By:</label>
+        <select id="sort-by" name="sort-by" onchange="showSortOptions()">
+            <option value="date">Date</option>
+            <option value="experience">Experience</option>
+        </select>
+    </div>
+    
+    <div id="date-sort-options" style="display: none;">
+        <label for="sort-order">Sort Order:</label>
+        <select id="sort-order" name="sort-order">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+    </div>
+    
+    <div id="experience-sort-options" style="display: none;">
+        <label for="experience"></label>
+        <select id="experience" name="experience">
+            <option value="fun">fun</option>
+            <option value="okok">okok</option>
+            <option value="boring">boring</option>
+        </select>
+    </div>
+    
+    <button class="recipe-buttons" onclick="sortTravels()">Sort</button>
+
+    <div class="recipe-container">
+        <div id="recipeContainer">
+            <div class="data-container">
+                <h2 id='subtitle'>Your Travels:</h2>
+                <div id="data"></div>
+            </div>
+        </div>
+        <button id="hideButton" class="recipe-buttons" onclick="hideTravels()">Hide Personal Travels</button>
+    </div>
+
+    <script>
+        function travel() {
+            let placename = document.getElementById("placename").value;
+            let date = document.getElementById("date").value;
+            let about = document.getElementById("about").value;
+            let experience = document.getElementById("experience").value;
+
+            if (!placename || !date || !about || !experience) {
+                document.getElementById("error").innerHTML = "Please fill in all fields.";
+                return;
+            }
+
+            let datePattern = /^\d{4}-\d{2}-\d{2}$/;
+            if (!datePattern.test(date)) {
+                document.getElementById("error").innerHTML = "Invalid date format. Please use YYYY-MM-DD.";
+                return;
+            }
+
+            let data = {
+                "placename": placename,
+                "date": date,
+                "about": about,
+                "experience": experience,
+            };
+
+            fetch('http://127.0.0.1:8432/api/travels/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById("error").innerHTML = "Travels updated!";
+                } else {
+                    return response.json().then(errorData => {
+                        if (errorData && errorData.message) {
+                            document.getElementById("error").innerHTML = errorData.message;
+                        } else {
+                            document.getElementById("error").innerHTML = "Error submitting travel";
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("error").innerHTML = "Error submitting travel";
+            });
+        }
+
+        function fetchTravel() {
+            let options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+            };
+            fetch("http://127.0.0.1:8432/api/travels/read", options)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Network response was not ok.');
+                    }
+                })
+                .then(response => {
+    let dataContainer = document.getElementById("data");
+    dataContainer.innerHTML = '';
+    if (response.length === 0) {
+        dataContainer.innerHTML = 'No travels found.';
+    } else {
+        let table = document.createElement('table');
+        let thead = table.createTHead();
+        let headerRow = thead.insertRow();
+        let headers = ['Place Name', 'Date', 'About', 'Experience'];
+        headers.forEach(headerText => {
+            let th = document.createElement('th');
+            let text = document.createTextNode(headerText);
+            th.appendChild(text);
+            headerRow.appendChild(th);
+        });
+        let tbody = table.createTBody();
+        response.forEach(travel => {
+            let row = tbody.insertRow();
+            let values = [travel.placename, travel.date, travel.about, travel.experience];
+            values.forEach(value => {
+                let cell = row.insertCell();
+                let textNode = document.createTextNode(value);
+                cell.appendChild(textNode);
+            });
+        });
+
+        dataContainer.appendChild(table);
+    }
+})
+
+                .catch(error => {
+                    document.getElementById("error").innerHTML = "Error fetching travels.";
+                    console.error('Error fetching travels:', error);
+                });
+
+            document.getElementById("recipeContainer").style.display = "block";
+            document.getElementById("hideButton").style.display = "block";
+        }
+
+        function hideTravels() {
+            document.getElementById("recipeContainer").style.display = "none";
+            document.getElementById("hideButton").style.display = "none";
+        }
+
+        function showSortOptions() {
+            var sortBy = document.getElementById('sort-by').value;
+            document.getElementById('date-sort-options').style.display = sortBy === 'date' ? 'block' : 'none';
+            document.getElementById('experience-sort-options').style.display = sortBy === 'experience' ? 'block' : 'none';
+        }
+
+        function sortTravels() {
+            var sortBy = document.getElementById('sort-by').value;
+            var sortOrder = document.getElementById('sort-order').value;
+            var experience = document.getElementById('experience').value;
+            let data = {
+                "sortBy": sortBy,
+                "sortOrder": sortOrder,
+                "experience": experience,
+            };
+            fetch('http://127.0.0.1:8432/api/travels/sort', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                let dataContainer = document.getElementById("data");
+                dataContainer.innerHTML = '';
+                if (data.length === 0) {
+                    dataContainer.innerHTML = 'No travels found.';
+                } else {
+                    let table = document.createElement('table');
+                    let thead = table.createTHead();
+                    let headerRow = thead.insertRow();
+                    let headers = ['Place Name', 'Date', 'About', 'Experience'];
+                    headers.forEach(headerText => {
+                        let th = document.createElement('th');
+                        let text = document.createTextNode(headerText);
+                        th.appendChild(text);
+                        headerRow.appendChild(th);
+                    });
+                    let tbody = table.createTBody();
+                    data.forEach(travel => {
+                        let row = tbody.insertRow();
+                        let values = [travel.placename, travel.date, travel.about, travel.experience];
+                        values.forEach(value => {
+                            let cell = row.insertCell();
+                            let textNode = document.createTextNode(value);
+                            cell.appendChild(textNode);
+                        });
+                    });
+
+                    dataContainer.appendChild(table);
+                }
+            })
+            .catch(error => {
+                document.getElementById("error").innerHTML = "Error fetching travels.";
+                console.error('Error fetching travels:', error);
+            });
+        }
+    </script>
+</body>
+</html>
