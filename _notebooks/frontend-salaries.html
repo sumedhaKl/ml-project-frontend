@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salary Predictor</title>
     <style>
-        body{
+        body {
             font-family: Arial, Helvetica, sans-serif;
             background-color: white;
         }
-        h1{
+        h1 {
             text-align: center;
             color: blueviolet;
         }
-        h2{
+        h2 {
             text-align: center;
             color: black;
         }
@@ -40,9 +40,6 @@
             border-radius: 5px;
             box-sizing: border-box;
         }
-        input[type="checkbox"] {
-            margin-bottom: 15px;
-        }
         input[type="submit"] {
             background-color: #333;
             color: #fff;
@@ -65,10 +62,10 @@
             font-family: 'Arial', serif;
             color: #777; 
         }
-        tr{
+        tr {
             color: green;
         }
-        td{
+        td {
             color: orange;
         }
     </style>
@@ -89,8 +86,8 @@
             <th>Company Size</th>
         </tr>
         <tr>
-        <td>Data 1</td>
-        <td>Data 2</td>
+            <td>Data 1</td>
+            <td>Data 2</td>
         </tr>
     </table>
     <h2>Salary Predictor</h2>
@@ -100,105 +97,140 @@
             <option value="2020">2020</option>
             <option value="2021">2021</option>
             <option value="2022">2022</option>
-        </select><br><br>
+        </select>
+        
         <label for="experienceLevel">Experience Level:</label>
         <select id="experienceLevel" name="experienceLevel" required>
-            <option value="entry">Entry Level</option>
-            <option value="mid">Mid Level</option>
-            <option value="senior">Senior Level</option>
-            <option value="expert">Expert Level</option>
-        </select><br><br>
+            <option value="EN">Entry Level</option>
+            <option value="MI">Mid Level</option>
+            <option value="SE">Senior Level</option>
+            <option value="EX">Expert Level</option>
+        </select>
+        
         <label for="employmentType">Employment Type:</label>
         <select id="employmentType" name="employmentType" required>
-            <option value="ft">Full-Time</option>
-        </select><br><br>
+            <option value="FT">Full-Time</option>
+        </select>
+        
         <label for="jobTitle">Job Title:</label>
         <select id="jobTitle" name="jobTitle" required>
-            <option value="jobTitle">Data Scientist</option>
-            <option value="jobTitle">Data Analyst</option>
-            <option value="jobTitle">Data Engineer</option>
-            <option value="jobTitle">Machine Learning Scientist</option>
-            <option value="jobTitle">Big Data Engineer</option>
-            <option value="jobTitle">Product Data Analyst</option>
-            <option value="jobTitle">Machine Learning Engineer</option>
-            <option value="jobTitle">Lead Data Scientist</option>
-            <option value="jobTitle">Business Data Analyst</option>
-            <option value="jobTitle">Lead Data Engineer</option>
-            <option value="jobTitle">Lead Data Analyst</option>
-            <option value="jobTitle">Data Scientist Consultant</option>
-            <option value="jobTitle">BI Data Analyst</option>
-            <option value="jobTitle">Director of Data Science</option>
-            <option value="jobTitle">Research Scientist</option>
-            <option value="jobTitle">Machine Learning Manager</option>
-            <option value="jobTitle">Data Engineering Manager</option>
-            <option value="jobTitle">Maching Learning Infrastructure Engineer</option>
-            <option value="jobTitle">ML Engineer</option>
-            <option value="jobTitle">AI Scientist</option>
-            <option value="jobTitle">Computer Vision Engineer</option>
-            <option value="jobTitle">Principal Data Scientist</option>
-            <option value="jobTitle">Head of Data</option>
-            <option value="jobTitle">3D Computer Vision Researcher</option>
-            <option value="jobTitle">Applied Data Scientist</option>
-            <option value="jobTitle">Marketing Data Analyst</option>
-            <option value="jobTitle">Cloud Data Engineer</option>
-            <option value="jobTitle">Financial Data Analyst</option>
-            <option value="jobTitle">Computer Vision Software Engineer</option>
-            <option value="jobTitle">Lead Data Scientist</option>
-            <option value="jobTitle">Data Science Manager</option>
-            <option value="jobTitle">Data Analytics Engineer</option>
-            <option value="jobTitle">Applied Machine Learning Scientist</option>
-            <option value="jobTitle">Data Specialist</option>
-            <option value="jobTitle">Data Science Engineer</option>
-            <option value="jobTitle">Big Data Architect</option>
-            <option value="jobTitle">Head of Data Science</option>
-            <option value="jobTitle">Analytics Engineer</option>
-            <option value="jobTitle">Data Architect</option>
-            <option value="jobTitle">Head of Machine Learning</option>
-            <option value="jobTitle">ETL Developer</option>
-            <option value="jobTitle">Lead Machine Learning Engineer</option>
-            <option value="jobTitle">Machine Learning Developer</option>
-            <option value="jobTitle">Principal Data Analyst</option>
-            <option value="jobTitle">Machine Learning Infrastructure Engineer</option>
-            <option value="jobTitle">NLP Engineer</option>
-            <option value="jobTitle">Data Analytics Lead</option>
-        </select><br><br>
-        <label for="currency">Salary Currency:</label>
-        <select id="currency" name="currency" required>
-            <option value="" disabled selected>Select Currency</option>
+            <option value="Data Scientist">Data Scientist</option>
+            <option value="Data Analyst">Data Analyst</option>
+            <option value="Data Engineer">Data Engineer</option>
+            <option value="Machine Learning Scientist">Machine Learning Scientist</option>
+            <option value="Big Data Engineer">Big Data Engineer</option>
+            <option value="Product Data Analyst">Product Data Analyst</option>
+            <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+            <option value="Lead Data Scientist">Lead Data Scientist</option>
+            <option value="Business Data Analyst">Business Data Analyst</option>
+            <option value="Lead Data Engineer">Lead Data Engineer</option>
+            <option value="Lead Data Analyst">Lead Data Analyst</option>
+            <option value="Data Scientist Consultant">Data Scientist Consultant</option>
+            <option value="BI Data Analyst">BI Data Analyst</option>
+            <option value="Director of Data Science">Director of Data Science</option>
+            <option value="Research Scientist">Research Scientist</option>
+            <option value="Machine Learning Manager">Machine Learning Manager</option>
+            <option value="Data Engineering Manager">Data Engineering Manager</option>
+            <option value="Machine Learning Infrastructure Engineer">Machine Learning Infrastructure Engineer</option>
+            <option value="ML Engineer">ML Engineer</option>
+            <option value="AI Scientist">AI Scientist</option>
+            <option value="Computer Vision Engineer">Computer Vision Engineer</option>
+            <option value="Principal Data Scientist">Principal Data Scientist</option>
+            <option value="Head of Data">Head of Data</option>
+            <option value="3D Computer Vision Researcher">3D Computer Vision Researcher</option>
+            <option value="Applied Data Scientist">Applied Data Scientist</option>
+            <option value="Marketing Data Analyst">Marketing Data Analyst</option>
+            <option value="Cloud Data Engineer">Cloud Data Engineer</option>
+            <option value="Financial Data Analyst">Financial Data Analyst</option>
+            <option value="Computer Vision Software Engineer">Computer Vision Software Engineer</option>
+            <option value="Lead Data Scientist">Lead Data Scientist</option>
+            <option value="Data Science Manager">Data Science Manager</option>
+            <option value="Data Analytics Engineer">Data Analytics Engineer</option>
+            <option value="Applied Machine Learning Scientist">Applied Machine Learning Scientist</option>
+            <option value="Data Specialist">Data Specialist</option>
+            <option value="Data Science Engineer">Data Science Engineer</option>
+            <option value="Big Data Architect">Big Data Architect</option>
+            <option value="Head of Data Science">Head of Data Science</option>
+            <option value="Analytics Engineer">Analytics Engineer</option>
+            <option value="Data Architect">Data Architect</option>
+            <option value="Head of Machine Learning">Head of Machine Learning</option>
+            <option value="ETL Developer">ETL Developer</option>
+            <option value="Lead Machine Learning Engineer">Lead Machine Learning Engineer</option>
+            <option value="Machine Learning Developer">Machine Learning Developer</option>
+            <option value="Principal Data Analyst">Principal Data Analyst</option>
+            <option value="Machine Learning Infrastructure Engineer">Machine Learning Infrastructure Engineer</option>
+            <option value="NLP Engineer">NLP Engineer</option>
+            <option value="Data Analytics Lead">Data Analytics Lead</option>
+        </select>
+        
+        <label for="salaryCurrency">Salary Currency:</label>
+        <select id="salaryCurrency" name="salaryCurrency" required>
             <option value="USD">USD</option>
             <option value="EUR">EUR</option>
             <option value="GBP">GBP</option>
             <option value="JPY">JPY</option>
             <option value="INR">INR</option>
-        </select><br><br>            
+        </select>
+        
         <label for="usdSalary">Salary in US Dollars:</label>
-        <input type="number" id="usdSalary" name="usdSalary" required><br><br>
+        <input type="number" id="usdSalary" name="salary_in_usd" required>
+        
         <label for="employeeResidence">Employee Residence:</label>
-        <input type="text" id="employeeResidence" name="employeeResidence" required><br><br>
+        <input type="text" id="employeeResidence" name="employee_residence" required>
+        
         <label for="remoteRatio">Remote Ratio:</label>
-        <input type="number" id="remoteRatio" name="remoteRatio" required><br><br>
+        <input type="number" id="remoteRatio" name="remote_ratio" required>
+        
         <label for="companyLocation">Company Location:</label>
-        <input type="text" id="companyLocation" name="companyLocation" required><br><br>
+        <input type="text" id="companyLocation" name="company_location" required>
+        
         <label for="companySize">Company Size:</label>
-        <input type="text" id="companySize" name="companySize" required><br><br>
+        <input type="text" id="companySize" name="company_size" required>
+        
         <button type="button" onclick="fetchFromPostman()">Predict Salary</button>
     </form>
     <div id="result"></div>
     <script>
         function fetchFromPostman() {
-            var postmanURL = 'http://127.0.0.1:8086/api/salaries/predict';
-            
-            fetch(postmanURL)
-            .then(response => response.json())
-            .then(data => {
-                var resultDiv = document.getElementById('result');
-                resultDiv.innerHTML = '<h2>Prediction Result</h2>';
-                resultDiv.innerHTML += '<p>Predicted Salary from Postman: $' + data.predicted_salary.toFixed(2) + '</p>';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
+            var formData = {
+                "work_year": document.getElementById("workYear").value,
+                "experience_level": document.getElementById("experienceLevel").value,
+                "employment_type": document.getElementById("employmentType").value,
+                "job_title": document.getElementById("jobTitle").value,
+                "salary_currency": document.getElementById("salaryCurrency").value,
+                "salary_in_usd": parseFloat(document.getElementById("usdSalary").value),
+                "employee_residence": document.getElementById("employeeResidence").value,
+                "remote_ratio": parseInt(document.getElementById("remoteRatio").value),
+                "company_location": document.getElementById("companyLocation").value,
+                "company_size": document.getElementById("companySize").value
+            };
+        
+            console.log("Form Data: ", formData);
+        
+            var raw = JSON.stringify(formData);
+            var requestOptions = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: raw,
+                redirect: "follow"
+            };
+        
+            fetch("http://127.0.0.1:8086/api/salaries/predict", requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("API Response: ", data);
+        
+                    var resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = '<h2>Prediction Result</h2>';
+                    
+                    resultDiv.innerHTML += '<p>Predicted Salary from Postman: $' + data.predicted_salary + '</p>';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }        
     </script>
 </body>
 </html>
