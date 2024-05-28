@@ -18,7 +18,6 @@ type: blogs
 <body>
     <span class="logo">🛒</span>
     <h1>Welcome to the extended shopping site! Here you can buy as much of what you want any time!</h1>
-
     <h2>Categories:</h2>
     <select id="categorySelect" onchange="showProducts()">
         <option value="clothing">Clothing</option>
@@ -28,30 +27,23 @@ type: blogs
         <option value="accessories">Accessories</option>
         <option value="musicalinstruments">Musical Instruments</option>
     </select>
-
     <div id="productList"></div>
-
     <div id="orderTracking">
         <h2>Order Tracking:</h2>
         <p id="orderStatus"></p>
         <button onclick="placeOrder()">Place Order</button>
     </div>
-
     <div id="pastOrders">
         <h2>Past Orders:</h2>
         <ul id="pastOrdersList"></ul>
     </div>
-
     <div id="discounts">
         <h2>Discounts Available</h2>
         <ul id="discountList"></ul>
     </div>
-
     <p>Already have an account? <a href="login.html">Login</a></p>
     <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
-
     <div id="result"></div>
-
     <script src="shopping.js">
         function fetchFromPostman() {
             const myHeaders = new Headers();
